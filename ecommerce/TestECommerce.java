@@ -1,0 +1,42 @@
+package ecommerce;
+
+import java.util.List;
+
+public class TestECommerce {
+
+    public static void main(String[] args) {
+        populateInventory();
+    }
+
+    private static void populateInventory() {
+        //filling inventory
+        InventoryManagement inventory = new InventoryManagement();
+        inventory.addInInventory(new Product(1,
+                "Laptop", 50000, 5));
+        inventory.addInInventory(new Product(2,
+                "Phone", 20000, 10));
+
+        //Printing Stock
+        inventory.printStock();
+
+        //Add products in Cart
+        User user1 = new User("Aashish", 1);
+        List<Product> products = user1.getProducts();
+        products.add(new Product(1, "Laptop",
+                50000, 1));
+        products.add(new Product(2, "Phone",
+                20000, 1));
+
+        try {
+            //checkout cart
+            inventory.checkout(products);
+            System.out.println(" Checkout successful!");
+        } catch (InventoryException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Statistical printing data
+        inventory.printStatistics();
+    }
+
+    }
